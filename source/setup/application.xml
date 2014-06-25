@@ -1,0 +1,50 @@
+<?xml version='1.0'?>
+<application>
+	<definition>
+		<idname>ckeditorlib</idname>
+		<release>
+			<version>4.4.1-1</version>
+			<date>2014/06/24</date>
+			<changesfile>CHANGES</changesfile>
+		</release>
+		<description>HTML WYSIWYG editor widget.</description>
+		<category>libraries</category>
+		<iconfile></iconfile>
+		<dependencies>
+			<dependency>innomatic[6.4]</dependency>
+		</dependencies>
+		<options>
+			<!-- <option></option> -->
+		</options>
+		<legal>
+			<author>
+				<name>Frederico Knabben</name>
+				<email></email>
+				<web>http://ckeditor.com/</web>
+			</author>
+            <copyright>Copyright (C) 2003-2014 CKSource - Frederico Knabben</copyright>
+			<license>GNU GPL 2</license>
+			<licensefile>LICENSE</licensefile>
+		</legal>
+		<support>
+			<supportemail>support@innomatica.it</supportemail>
+			<bugsemail>bugs@innomatica.it</bugsemail>
+			<maintainer>
+				<name>Alex Pagnoni</name>
+				<email>alex.pagnoni@innoteam.it</email>
+			</maintainer>
+		</support>
+	</definition>
+
+<components>
+
+    <wuiwidget name="ckeditor" file="WuiCkeditor.php"/>
+
+    <generalpreinstall file="generalpreinstall.php"/>
+
+    <generalpreupdate file="generalpreupdate.php"/>
+
+    <generalpostuninstall file="generalpostuninstall.php"/> 
+
+</components>
+</application>
