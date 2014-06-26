@@ -54,15 +54,12 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
             . '</textarea>'
             . '<script type="text/javascript">'
             . ' $.getScript("../shared/ckeditor/ckeditor.js", function(){'
-            . '   function onFocus(){ document.getElementById("'.$this->mArgs['id'].'").innerHTML = CKEDITOR.instances.'.$this->mArgs['id'].'.getData(); }'
-            . '   function onBlur(){ document.getElementById("'.$this->mArgs['id'].'").innerHTML = CKEDITOR.instances.'.$this->mArgs['id'].'.getData(); }'
-            . '   CKEDITOR.replace( "'.$this->mArgs['id'].'", { on: { focus: onFocus, blur: onBlur } });'
+            . '   function onChange(){ document.getElementById("'.$this->mArgs['id'].'").innerHTML = CKEDITOR.instances.'.$this->mArgs['id'].'.getData(); }'
+            . '   CKEDITOR.replace( "'.$this->mArgs['id'].'", { on: { change: onChange } });'
             . ' });'
             // . ((isset($this->mArgs['readonly']) and strlen($this->mArgs['readonly'])) ? 'CKEDITOR.instances.'.$this->mArgs['id'].'.setReadOnly();' : '')
             . '</script>'
             . ($this->mComments ? '<!-- end ' . $this->mName . " textarea -->\n" : '');
-
-
 
         $result = true;
         return $result;
