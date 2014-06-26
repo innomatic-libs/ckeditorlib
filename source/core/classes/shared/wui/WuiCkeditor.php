@@ -30,6 +30,12 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
     {
         parent::__construct($elemName, $elemArgs, $elemTheme, $dispEvents);
  
+        if ( !isset( $this->mArgs['height'] ) ) {
+            $this->mArgs['height'] = '200';
+        }
+        if ( !isset( $this->mArgs['width'] ) ) {
+            $this->mArgs['width'] = '550';
+        }
     }
 
     /**
@@ -46,16 +52,16 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
             . '<textarea ' 
             . (isset($this->mArgs['id']) ? ' id="'.$this->mArgs['id'].'"' : '')
             . (isset($this->mArgs['id']) ? ' name="'.$this->mArgs['id'].'"' : '')
-            . (isset($this->mArgs['maxlength']) ? ' maxlength="'.$this->mArgs['maxlength'].'"' : '')
-            . (strlen($this->mArgs['cols']) ? ' cols="' . $this->mArgs['cols'] . '"' : '') 
-            . (strlen($this->mArgs['rows']) ? ' rows="' . $this->mArgs['rows'] . '"' : '') 
             . '>' 
             . ((isset($this->mArgs['value']) and strlen($this->mArgs['value'])) ? \Innomatic\Wui\Wui::utf8_entities($this->mArgs['value']) : '') 
             . '</textarea>'
             . '<script type="text/javascript">'
             . ' $.getScript("../shared/ckeditor/ckeditor.js", function(){'
             . '   function onChange(){ document.getElementById("'.$this->mArgs['id'].'").innerHTML = CKEDITOR.instances.'.$this->mArgs['id'].'.getData(); }'
-            . '   CKEDITOR.replace( "'.$this->mArgs['id'].'", { on: { change: onChange } });'
+            . '   CKEDITOR.replace( "'.$this->mArgs['id'].'", { '
+            .           (isset($this->mArgs['width']) ? ' width:"'.$this->mArgs['width'].'px",' : '') 
+            .           (isset($this->mArgs['height']) ? ' height:"'.$this->mArgs['height'].'px",' : '') 
+            . '         on: { change: onChange } });'
             . ' });'
             // . ((isset($this->mArgs['readonly']) and strlen($this->mArgs['readonly'])) ? 'CKEDITOR.instances.'.$this->mArgs['id'].'.setReadOnly();' : '')
             . '</script>'
