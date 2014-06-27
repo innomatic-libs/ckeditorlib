@@ -27,6 +27,10 @@ namespace Shared\Wui;
  *             <height>300</height>
  *             <width>700</width>
  *             <value>Hello Word</value>
+ *             <basicstyles>true</basicstyles>
+ *             <paragraph>false</paragraph>
+ *             <links>false</links>
+ *             <inline>true</inline>
  *         </args>
  *     </ckeditor>
  * 
@@ -40,8 +44,25 @@ namespace Shared\Wui;
  */
 class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
 {
+    /*! @public mValue string - Value of textarea. */
+    public $mId;
+    /*! @public mHeight string - Height for this element. */
+    public $mHeight = '200';
+    /*! @public mHeight string - Height for this element. */
+    public $mWidth = '550';
+    /*! @public mValue string - Value of textarea. */
+    public $mValue;
+    /*! @public mValue string - Value of textarea. */
+    public $mBasicstyles = true;
+    /*! @public mValue string - Value of textarea. */
+    public $mParagraph = true;
+    /*! @public mValue string - Value of textarea. */
+    public $mLinks = true;
+    /*! @public mValue string - Value of textarea. */
+    public $mInline = false;
+
     /**
-     * Costruct 
+     * Costruct:
      * @param string $elemName   name of element
      * @param string $elemArgs   array witch params
      * @param string $elemTheme  theme of element
@@ -51,12 +72,26 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
     {
         parent::__construct($elemName, $elemArgs, $elemTheme, $dispEvents);
  
-        if ( !isset( $this->mArgs['height'] ) ) {
-            $this->mArgs['height'] = '200';
+        $this->mId = $this->mArgs['id'];
+        $this->mValue = $this->mArgs['value'];
+
+        if (isset($this->mArgs['height'])) $this->mHeight = $this->mArgs['height'];
+        if (isset($this->mArgs['width'])) $this->mWidth = $this->mArgs['width'];
+
+        // default components of the toolbar are true
+        if (isset($this->mArgs['basicstyles'])) {
+            if ($this->mArgs['basicstyles'] === 'false') $this->mBasicstyles = false;
         }
-        if ( !isset( $this->mArgs['width'] ) ) {
-            $this->mArgs['width'] = '550';
+        if (isset($this->mArgs['paragraph'])) {
+            if ($this->mArgs['paragraph'] === 'false') $this->mParagraph = false;
         }
+        if (isset($this->mArgs['links'])) {
+            if ($this->mArgs['links'] === 'false') $this->mLinks = false;
+        } 
+
+        if (isset($this->mArgs['inline'])) {
+            if ($this->mArgs['inline'] === 'true') $this->mInline = true;
+        } 
     }
 
     /**
@@ -66,22 +101,38 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
     public function generateSource()
     {
 
-        $id = $this->mArgs['id'];
-        $value = $this->mArgs['value'];
-        $height = $this->mArgs['height'];
-        $width = $this->mArgs['width'];
+        $basicstyles = '{ name: "basicstyles", items: [ "Bold", "Italic" ] },';
+        $paragraph = '{ name: "paragraph", items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent" ] },';
+        $links = '{ name: "links", items: [ "Link", "Unlink" ] },';
 
         $this->mLayout = ($this->mComments ? '<!-- begin ' . $this->mName . ' textarea -->' : '') 
-            . '<textarea ' . (isset($id) ? ' id="'.$id.'"' : '') . (isset($id) ? ' name="'.$id.'"' : '') . '>' 
-            . ((isset($value) and strlen($value)) ? \Innomatic\Wui\Wui::utf8_entities($value) : '') 
+            . ( $this->mInline ? 
+                '<style> .cke_textarea_inline[title~='.$this->mId.'] { 
+                    padding-left: 10px; 
+                    padding-right: 10px; 
+                    height: '.$this->mHeight.'px;
+                    overflow: auto; 
+                    border: 1px solid gray; 
+                    -webkit-appearance: textfield; } 
+                </style>' : '')
+            . '<textarea id="'.$this->mId.'" name="'.$this->mId.'" >' 
+            . ((isset($this->mValue) and strlen($this->mValue)) ? \Innomatic\Wui\Wui::utf8_entities($this->mValue) : '') 
             . '</textarea>'
             . '<script type="text/javascript">'
             . ' $.getScript("../shared/ckeditor/ckeditor.js", function(){'
-            . '   function onChange(){ document.getElementById("'.$id.'").innerHTML = CKEDITOR.instances.'.$id.'.getData(); }'
-            . '   CKEDITOR.replace( "'.$id.'", { '
-            .       (isset($width) ? ' width:"'.$width.'px",' : '') 
-            .       (isset($height) ? ' height:"'.$height.'px",' : '') 
-            . '     on: { change: onChange } 
+            . '   var editor = CKEDITOR.instances.'.$this->mId.';'  
+            . '   function onChange(){ document.getElementById("'.$this->mId.'").innerHTML = editor.getData(); }'
+            . '   CKEDITOR.'.( $this->mInline ? 'inline' : 'replace' ).'( "'
+                    .$this->mId.'", { '
+            . '     width:"'.$this->mWidth.'px",' 
+            . '     height:"'.$this->mHeight.'px",'
+            . '     on: { change: onChange },
+                    toolbar: ['
+            .           ( $this->mBasicstyles ? $basicstyles : '')
+            .           ( $this->mParagraph ? $paragraph : '')
+            .           ( $this->mLinks ? $links : '')
+            .'          { name: "about", items: [ "About" ] }
+                    ],
                   });'
             . ' });'
             . '</script>'
