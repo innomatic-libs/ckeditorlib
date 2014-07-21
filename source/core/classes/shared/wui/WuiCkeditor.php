@@ -120,8 +120,9 @@ class WuiCKEditor extends \Innomatic\Wui\Widgets\WuiWidget
             . '</textarea>'
             . '<script type="text/javascript">'
             . ' $.getScript("../shared/ckeditor/ckeditor.js", function(){'
-            . '   var editor = CKEDITOR.instances.'.$this->mId.';'  
-            . '   function onChange(){ document.getElementById("'.$this->mId.'").innerHTML = editor.getData(); }'
+            . '   function onChange(){ 
+                    document.getElementById("'.$this->mId.'").innerHTML = CKEDITOR.instances.'.$this->mId.'.getData(); 
+                  }'
             . '   CKEDITOR.'.( $this->mInline ? 'inline' : 'replace' ).'( "'
                     .$this->mId.'", { '
             . '     width:"'.$this->mWidth.'px",' 
