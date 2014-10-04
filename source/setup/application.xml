@@ -40,11 +40,7 @@
 
     <wuiwidget name="ckeditor" file="WuiCkeditor.php"/>
 
-    <generalpreinstall file="generalpreinstall.php"/>
-
-    <generalpreupdate file="generalpreupdate.php"/>
-
-    <generalpostuninstall file="generalpostuninstall.php"/> 
+    <shared name="ckeditor" />
 
 </components>
 </application>
