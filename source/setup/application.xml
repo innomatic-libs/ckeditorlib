@@ -27,11 +27,11 @@
 			<licensefile>LICENSE</licensefile>
 		</legal>
 		<support>
-			<supportemail>support@innomatica.it</supportemail>
-			<bugsemail>bugs@innomatica.it</bugsemail>
+			<supportemail>support@innomatic.io</supportemail>
+			<bugsemail>bugs@innomatic.io</bugsemail>
 			<maintainer>
 				<name>Alex Pagnoni</name>
-				<email>alex.pagnoni@innoteam.it</email>
+				<email>alex.pagnoni@innomatic.io</email>
 			</maintainer>
 		</support>
 	</definition>
