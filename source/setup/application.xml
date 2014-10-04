@@ -3,15 +3,15 @@
 	<definition>
 		<idname>ckeditorlib</idname>
 		<release>
-			<version>4.4.1-1</version>
-			<date>2014/06/24</date>
+			<version>4.4.1-2</version>
+            <date>2014/10/04</date>
 			<changesfile>CHANGES</changesfile>
 		</release>
 		<description>HTML WYSIWYG editor widget.</description>
 		<category>libraries</category>
 		<iconfile></iconfile>
 		<dependencies>
-			<dependency>innomatic[6.4]</dependency>
+			<dependency>innomatic[6.4.0]</dependency>
 		</dependencies>
 		<options>
 			<!-- <option></option> -->

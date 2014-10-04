@@ -2,7 +2,7 @@
 <project name="ckeditorlib" basedir="." default="package">
 
 	<property name="name" value="ckeditorlib" />
-	<property name="version" value="4.4.1-1" />
+	<property name="version" value="4.4.1-2" />
 
 	<target name="sources">
 		<tar destfile="build/${name}-src-${version}.tgz" compression="gzip">
