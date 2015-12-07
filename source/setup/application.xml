@@ -3,15 +3,15 @@
 	<definition>
 		<idname>ckeditorlib</idname>
 		<release>
-			<version>4.4.1-1</version>
-			<date>2014/06/24</date>
+			<version>4.4.2</version>
+            <date>2014/10/04</date>
 			<changesfile>CHANGES</changesfile>
 		</release>
 		<description>HTML WYSIWYG editor widget.</description>
 		<category>libraries</category>
 		<iconfile></iconfile>
 		<dependencies>
-			<dependency>innomatic[6.4]</dependency>
+			<dependency>innomatic[6.4.0]</dependency>
 		</dependencies>
 		<options>
 			<!-- <option></option> -->
@@ -27,11 +27,11 @@
 			<licensefile>LICENSE</licensefile>
 		</legal>
 		<support>
-			<supportemail>support@innomatica.it</supportemail>
-			<bugsemail>bugs@innomatica.it</bugsemail>
+			<supportemail>support@innomatic.io</supportemail>
+			<bugsemail>bugs@innomatic.io</bugsemail>
 			<maintainer>
 				<name>Alex Pagnoni</name>
-				<email>alex.pagnoni@innoteam.it</email>
+				<email>alex.pagnoni@innomatic.io</email>
 			</maintainer>
 		</support>
 	</definition>
@@ -40,11 +40,7 @@
 
     <wuiwidget name="ckeditor" file="WuiCkeditor.php"/>
 
-    <generalpreinstall file="generalpreinstall.php"/>
-
-    <generalpreupdate file="generalpreupdate.php"/>
-
-    <generalpostuninstall file="generalpostuninstall.php"/> 
+    <shared name="ckeditor" />
 
 </components>
 </application>
